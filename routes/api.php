@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 | 1. Auth
 | 2. Cart
 | 3. Product
+| 4. Order
 |
 */
 
@@ -35,6 +36,9 @@ Route::group(['prefix' => 'auth'], function () {
 Route::group(['middleware' => ['auth:api']], function () {
     /** Cart */
     Route::resource('cart', 'Carts\CartsController')->except(['create', 'edit', 'destroy']);
+
+    /** Order */
+    Route::resource('order', 'Orders\OrdersController')->only(['store']);
 });
 
 /** Product */

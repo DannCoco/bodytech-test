@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\CartDetail;
+namespace App\Http\Requests\Order;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CartDetailRequest extends FormRequest
+class OrderRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class CartDetailRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,7 @@ class CartDetailRequest extends FormRequest
     public function rules()
     {
         return [
-
+            'cart_id' => 'required'
         ];
     }
 }
