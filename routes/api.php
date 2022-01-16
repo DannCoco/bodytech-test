@@ -34,7 +34,7 @@ Route::group(['prefix' => 'auth'], function () {
 
 Route::group(['middleware' => ['auth:api']], function () {
     /** Cart */
-    Route::resource('cart', 'Carts\CartsController')->except(['create', 'edit']);
+    Route::resource('cart', 'Carts\CartsController')->except(['create', 'edit', 'destroy']);
 });
 
 /** Product */
