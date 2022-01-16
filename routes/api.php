@@ -42,4 +42,7 @@ Route::group(['middleware' => ['auth:api']], function () {
 });
 
 /** Product */
-Route::resource('product', 'Products\ProductsController')->except(['create', 'edit']);
+Route::prefix('product')->group(function () {
+    Route::resource('product', 'Products\ProductsController')->except(['create', 'edit']);
+    Route::resource('csv-load', 'Products\LoadProductsController')->only(['store']);
+});

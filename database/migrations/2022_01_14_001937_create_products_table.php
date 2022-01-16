@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
             $table->text('description');
             $table->integer('price');
             $table->integer('discount');
-            $table->integer('final_price');
+            $table->integer('final_price')->default(0)->nullable();
             $table->string('image');
             $table->integer('stock');
             $table->softDeletes();

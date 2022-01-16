@@ -34,4 +34,9 @@ class EloquentProductRepository implements ProductRepository
     {
         return Product::find($id)->delete();
     }
+
+    public function insert($data)
+    {
+        return Product::insert($data);
+    }
 }

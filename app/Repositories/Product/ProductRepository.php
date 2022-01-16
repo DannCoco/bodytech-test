@@ -11,4 +11,6 @@ interface ProductRepository
     public function getById($id);
 
     public function update($id, $data);
+
+    public function insert($data);
 }

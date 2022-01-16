@@ -54,4 +54,37 @@ trait CartTrait
             return $detail;
         });
     }
+
+    public function csv($file)
+    {
+        header('Content-type: text/plain; charset=utf-8');
+
+        $path = $file->getRealPath();
+        $getFile = fopen('C:/xampp/tmp/products.csv', 'w');
+        $fileNew = fopen($path, 'r');
+
+        $count = 0;
+        $mapData = [];
+        $newData = [];
+
+        while (!feof($fileNew)) {
+            $line = fgetcsv($fileNew, 0, ',');
+            if(!empty($line[0])){
+                if ($count != 0 && $line) {
+                    $mapData['name'] = $line[0];
+                    $mapData['description'] = $line[1];
+                    $mapData['price'] = $line[2];
+                    $mapData['discount'] = $line[3];
+                    $mapData['image'] = $line[4];
+                    $mapData['stock'] = $line[5];
+
+                    array_push($newData, $mapData);
+                }
+            }
+
+            $count++;
+        }
+
+        return $newData;
+    }
 }
