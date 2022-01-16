@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 | 2. Cart
 | 3. Product
 | 4. Order
+| 5. Report
 |
 */
 
@@ -34,15 +35,19 @@ Route::group(['prefix' => 'auth'], function () {
 });
 
 Route::group(['middleware' => ['auth:api']], function () {
+    /** Product */
+    Route::prefix('product')->group(function () {
+        Route::resource('product', 'Products\ProductsController')->except(['create', 'edit']);
+        Route::resource('csv-load', 'Products\LoadProductsController')->only(['store']);
+    });
+
     /** Cart */
     Route::resource('cart', 'Carts\CartsController')->except(['create', 'edit', 'destroy']);
 
     /** Order */
     Route::resource('order', 'Orders\OrdersController')->only(['store']);
-});
 
-/** Product */
-Route::prefix('product')->group(function () {
-    Route::resource('product', 'Products\ProductsController')->except(['create', 'edit']);
-    Route::resource('csv-load', 'Products\LoadProductsController')->only(['store']);
+    /** Report */
 });
+Route::resource('sales-report', 'Sales\ReportController')->only(['index']);
+
